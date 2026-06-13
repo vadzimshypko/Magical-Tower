@@ -9,6 +9,8 @@ namespace Scripts.Gameplay
     { 
         [SerializeField]
         private NavMeshAgent agent;
+        [SerializeField] 
+        private Renderer renderer;
         
         private Action<EnemyView> _onEnemyDied;
         private TowerView _target;
@@ -23,6 +25,11 @@ namespace Scripts.Gameplay
         private void OnDestroy()
         {
             _onEnemyDied.Invoke(this);
+        }
+
+        public bool IsVisible()
+        {
+            return renderer.isVisible;
         }
     }
 }

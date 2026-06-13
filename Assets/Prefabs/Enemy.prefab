@@ -181,3 +181,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Gameplay.EnemyView
   agent: {fileID: 5437664115115889477}
+  renderer: {fileID: 9137444183631390640}

@@ -33,6 +33,7 @@ namespace Scripts.Infrastructure
                 .WithParameter(typeof(Transform), enemiesRoot)
                 .WithParameter(typeof(TowerView), towerView)
                 .WithParameter(typeof(Collider), floor); 
+            builder.Register<EnemyRegistry>(Lifetime.Scoped);
         }
     }
 }
