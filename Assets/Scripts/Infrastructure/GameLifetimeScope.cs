@@ -18,6 +18,9 @@ namespace Scripts.Infrastructure
         // tower
         [SerializeField]
         private TowerView towerView;
+        // UI
+        [SerializeField]
+        private GameResultView  gameResultView;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -28,6 +31,7 @@ namespace Scripts.Infrastructure
         private void RegistryEnemy(IContainerBuilder builder)
         {
             builder.RegisterInstance(wavesConfig);
+            builder.RegisterInstance(gameResultView);
             builder.Register<WavesSpawner>(Lifetime.Scoped);
             builder.Register<EnemyFactory>(Lifetime.Scoped)
                 .WithParameter(typeof(Transform), enemiesRoot)

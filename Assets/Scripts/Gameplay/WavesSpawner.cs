@@ -21,7 +21,6 @@ namespace Scripts.Gameplay
         {
             foreach (var wave in _wavesConfig.Waves)
             {
-                Debug.Log("wave " + Time.time);
                 await SpawnWave(wave);
             }
         }
@@ -62,8 +61,6 @@ namespace Scripts.Gameplay
         private void SpawnEnemy(EnemyView enemyPrefab)
         {
             var enemyView = _enemyFactory.Create(enemyPrefab);
-            
-            Debug.Log("enemy " + enemyView.name + " " + Time.time);
         }
 
     }

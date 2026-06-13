@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -5,6 +6,10 @@ namespace Scripts.Gameplay
 {
     public class EnemyRegistry
     {
+        public event Action AllEnemiesDefeated;
+
+        public bool HasEnemiesLeft => _enimies.Count > 0;
+        
         private readonly EnemyFactory _enemyFactory;
 
         private readonly List<EnemyView> _enimies = new();
@@ -35,6 +40,10 @@ namespace Scripts.Gameplay
         private void UnregisterEnemy(EnemyView enemyView)
         {
             _enimies.Remove(enemyView);
+            if (_enimies.Count == 0)
+            {
+                AllEnemiesDefeated?.Invoke();
+            }
         }
     }
 }
