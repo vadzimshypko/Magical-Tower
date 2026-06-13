@@ -826,7 +826,25 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: DOTWEEN;DOTWEEN_NOAUDIO
+    EmbeddedLinux: DOTWEEN;DOTWEEN_NOAUDIO
+    GameCoreScarlett: DOTWEEN;DOTWEEN_NOAUDIO
+    GameCoreXboxOne: DOTWEEN;DOTWEEN_NOAUDIO
+    Kepler: DOTWEEN;DOTWEEN_NOAUDIO
+    LinuxHeadlessSimulation: DOTWEEN;DOTWEEN_NOAUDIO
+    Nintendo Switch: DOTWEEN;DOTWEEN_NOAUDIO
+    Nintendo Switch 2: DOTWEEN;DOTWEEN_NOAUDIO
+    PS4: DOTWEEN;DOTWEEN_NOAUDIO
+    PS5: DOTWEEN;DOTWEEN_NOAUDIO
+    QNX: DOTWEEN;DOTWEEN_NOAUDIO
+    Standalone: DOTWEEN;DOTWEEN_NOAUDIO
+    VisionOS: DOTWEEN;DOTWEEN_NOAUDIO
+    WebGL: DOTWEEN;DOTWEEN_NOAUDIO
+    Windows Store Apps: DOTWEEN;DOTWEEN_NOAUDIO
+    XboxOne: DOTWEEN;DOTWEEN_NOAUDIO
+    iPhone: DOTWEEN;DOTWEEN_NOAUDIO
+    tvOS: DOTWEEN;DOTWEEN_NOAUDIO
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -925,11 +943,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: ce429b0e-116e-427b-b3ae-331a24fd898e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: MagicalTower 2026-06-13_17-19-44
+  organizationId: vadimshipko
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
