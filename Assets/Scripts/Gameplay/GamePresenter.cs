@@ -9,17 +9,24 @@ namespace Scripts.Gameplay
         private readonly WavesSpawner _wavesSpawner;
         private readonly EnemyRegistry _enemyRegistry;
         private readonly GameResultView _gameResultView;
+        private readonly TowerView _towerView;
 
-        public GamePresenter(WavesSpawner wavesSpawner, EnemyRegistry enemyRegistry, GameResultView gameResultView)
+        public GamePresenter(
+            WavesSpawner wavesSpawner,
+            EnemyRegistry enemyRegistry,
+            GameResultView gameResultView,
+            TowerView towerView)
         {
             _wavesSpawner = wavesSpawner;
             _enemyRegistry = enemyRegistry;
             _gameResultView = gameResultView;
+            _towerView = towerView;
         }
 
         public void Start()
         {
             StartGameLoop().Forget();
+            _towerView.Death += EntryLoseState;
         }
 
         private async UniTask StartGameLoop()
@@ -43,6 +50,11 @@ namespace Scripts.Gameplay
         private void EntryWinState()
         {
             _gameResultView.ShowWin();
+        }
+        
+        private void EntryLoseState(IDamagable _)
+        {
+            _gameResultView.ShowLose();
         }
 
         private bool IsWinConditionMet()

@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Scripts.Configs;
 using UnityEngine;
 using UnityEngine.AI;
@@ -20,9 +21,10 @@ namespace Scripts.Gameplay.Enemies
         [SerializeField] 
         private Renderer rendererComponent;
         [SerializeField]
-        private EnemyConfig enemyConfig;
+        private EnemyConfig config;
         
         private TowerView _target;
+        private bool _isAttacking;
 
         public void TakeDamage(int damage)
         {
@@ -36,9 +38,35 @@ namespace Scripts.Gameplay.Enemies
 
         public void Init(TowerView towerView)
         {
-            Health = enemyConfig.maxHealth;
+            Health = config.maxHealth;
             _target = towerView;
+            _isAttacking = false;
             agent.destination = _target.transform.position;
+        }
+        
+        public void Update()
+        {
+            if (!_isAttacking && _target != null && IsInAttackRange())
+            {
+                Attack().Forget();
+            }
+        }
+
+        private async UniTask Attack()
+        {
+            _isAttacking = true;
+            while (_target != null && _target.IsAlive)
+            {
+                _target.TakeDamage(config.damage);
+                await UniTask.WaitForSeconds(config.cooldown);
+            }
+            _isAttacking = false;
+
+        }
+
+        private bool IsInAttackRange()
+        {
+            return agent.remainingDistance < config.minDistanceForAttacking;
         }
 
         private void OnDestroy()

@@ -23,6 +23,8 @@ namespace Scripts.Infrastructure
         [Header("UI")]
         [SerializeField]
         private GameResultView  gameResultView;
+        [SerializeField]
+        private HealthBarController _healthBarControllerController;
         [Header("Spells")]
         [SerializeField]
         private Transform spellPanel;
@@ -36,6 +38,8 @@ namespace Scripts.Infrastructure
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<GamePresenter>();
+            builder.RegisterInstance(towerView);
+            builder.RegisterInstance(_healthBarControllerController);
             builder.RegisterInstance(gameResultView);
             RegistryEnemies(builder);
             RegistrySpells(builder);
@@ -44,7 +48,6 @@ namespace Scripts.Infrastructure
         private void RegistryEnemies(IContainerBuilder builder)
         {
             builder.RegisterInstance(wavesConfig);
-            builder.RegisterInstance(towerView);
             builder.Register<WavesSpawner>(Lifetime.Scoped);
             builder.Register<EnemyFactory>(Lifetime.Scoped)
                 .WithParameter(typeof(Transform), enemiesRoot)

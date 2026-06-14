@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f11d9e750704687a696279eafa0e707, type: 3}
+  m_Script: {fileID: 11500000, guid: 05ec15cbec814632957cb5ab1795d7bd, type: 3}
   m_Name: BigEnemyConfig
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Configs.EnemyConfig
   maxHealth: 10
+  damage: 10
+  minDistanceForAttacking: 5
+  cooldown: 2

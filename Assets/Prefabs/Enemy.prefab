@@ -182,4 +182,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Gameplay.EnemyView
   agent: {fileID: 5437664115115889477}
   rendererComponent: {fileID: 9137444183631390640}
-  enemyConfig: {fileID: 11400000, guid: e6beb40cdd338457494d202a03b28551, type: 2}
+  config: {fileID: 11400000, guid: 0e250b57a07184760926d937d61cc643, type: 2}

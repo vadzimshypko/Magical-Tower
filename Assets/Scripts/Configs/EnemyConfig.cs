@@ -3,8 +3,10 @@ using UnityEngine;
 namespace Scripts.Configs
 {
     [CreateAssetMenu(fileName = "EnemyConfig", menuName = "ScriptableObjects/EnemyConfig")]
-    public class EnemyConfig : ScriptableObject
+    public class EnemyConfig : HealthConfig
     {
-        public int maxHealth;
+        public int damage;
+        public float minDistanceForAttacking;
+        public float cooldown;
     }
 }
