@@ -1,27 +1,31 @@
 using System.Collections.Generic;
 using UnityEngine;
-using VContainer.Unity;
 
 namespace Scripts.Gameplay.Spells
 {
-    public class SpellService : IStartable
+    public class SpellService
     {
-        private IEnumerable<ISpell> _spells;
-        private Transform _root;
-        private SpellButton _spellButton;
+        private readonly IEnumerable<ISpell> _spells;
+        private readonly Transform _root;
+        private readonly SpellButton _spellButton;
 
-        private List<SpellButton> _buttons = new();
+        private readonly List<SpellButton> _buttons = new();
 
         public SpellService(IEnumerable<ISpell> spells, Transform root, SpellButton spellButton)
         {
             _spells = spells;
             _root = root;
             _spellButton = spellButton;
+            CreateButtonForSpells();
         }
 
-        public void Start()
+        public void Stop()
         {
-            CreateButtonForSpells();
+            foreach (var button in _buttons)
+            {
+                Object.Destroy(button.gameObject);
+            }
+            _buttons.Clear();
         }
 
         private void CreateButtonForSpells()

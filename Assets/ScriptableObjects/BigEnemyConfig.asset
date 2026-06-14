@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Configs.EnemyConfig
   maxHealth: 10
   damage: 10
-  minDistanceForAttacking: 5
+  minDistanceForAttacking: 4
   cooldown: 2

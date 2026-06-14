@@ -1144,7 +1144,7 @@ MonoBehaviour:
   floor: {fileID: 871753423}
   towerView: {fileID: 378398853}
   gameResultView: {fileID: 1864456144}
-  _healthBarControllerController: {fileID: 131640418}
+  healthBarController: {fileID: 131640418}
   spellPanel: {fileID: 811351875}
   spellButtonPrefab: {fileID: 8564980292354823821, guid: 29d374476059d492f8dade377d31e48e, type: 3}
   fireballConfig: {fileID: 11400000, guid: 8a293e65d9fd24ff6890ac1d9f1a265e, type: 2}

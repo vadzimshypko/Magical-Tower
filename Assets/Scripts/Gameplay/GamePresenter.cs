@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Scripts.Gameplay.Enemies;
+using Scripts.Gameplay.Spells;
 using VContainer.Unity;
 
 namespace Scripts.Gameplay
@@ -10,17 +11,20 @@ namespace Scripts.Gameplay
         private readonly EnemyRegistry _enemyRegistry;
         private readonly GameResultView _gameResultView;
         private readonly TowerView _towerView;
+        private readonly SpellService  _spellService;
 
         public GamePresenter(
             WavesSpawner wavesSpawner,
             EnemyRegistry enemyRegistry,
             GameResultView gameResultView,
-            TowerView towerView)
+            TowerView towerView,
+            SpellService spellService)
         {
             _wavesSpawner = wavesSpawner;
             _enemyRegistry = enemyRegistry;
             _gameResultView = gameResultView;
             _towerView = towerView;
+            _spellService =  spellService;
         }
 
         public void Start()
@@ -49,11 +53,13 @@ namespace Scripts.Gameplay
 
         private void EntryWinState()
         {
+            _spellService.Stop();
             _gameResultView.ShowWin();
         }
         
         private void EntryLoseState(IDamagable _)
         {
+            _spellService.Stop();
             _gameResultView.ShowLose();
         }
 

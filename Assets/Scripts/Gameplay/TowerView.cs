@@ -1,6 +1,7 @@
 using System;
 using Scripts.Configs;
 using UnityEngine;
+using VContainer;
 
 namespace Scripts.Gameplay
 {
@@ -12,22 +13,32 @@ namespace Scripts.Gameplay
         public Transform RootForSpells => rootForSpells;
 
         public bool IsAlive => Health > 0;
-        public int Health { get; }
+        public int Health { get; private set; }
         
         [SerializeField]
         private Transform rootForSpells;
         [SerializeField]
         private HealthConfig config;
-
-        public TowerView(HealthBarController healthBarController)
+        
+        [Inject]
+        public void Inject(HealthBarController healthBarController)
         {
-            Damaged += (x) => healthBarController.SetHealth(x.Health, config.maxHealth);
+            Damaged += x => healthBarController.SetHealth(x.Health, config.maxHealth);
+        }
+
+        private void Awake()
+        {
             Health = config.maxHealth;
         }
-        
+
         public void TakeDamage(int damage)
         {
-            throw new NotImplementedException();
+            Health -= damage;
+            Damaged?.Invoke(this);
+            if (!IsAlive)
+            {
+                Death?.Invoke(this);
+            }
         }
     }
 }

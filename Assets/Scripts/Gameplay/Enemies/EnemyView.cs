@@ -24,7 +24,6 @@ namespace Scripts.Gameplay.Enemies
         private EnemyConfig config;
         
         private TowerView _target;
-        private bool _isAttacking;
 
         public void TakeDamage(int damage)
         {
@@ -40,33 +39,31 @@ namespace Scripts.Gameplay.Enemies
         {
             Health = config.maxHealth;
             _target = towerView;
-            _isAttacking = false;
             agent.destination = _target.transform.position;
+            WaitUntilReachedTower().Forget();
         }
-        
-        public void Update()
+
+        private async UniTask WaitUntilReachedTower()
         {
-            if (!_isAttacking && _target != null && IsInAttackRange())
-            {
-                Attack().Forget();
-            }
+            await UniTask.WaitUntil(IsInAttackRange);
+
+            Attack().Forget();
         }
+     
 
         private async UniTask Attack()
         {
-            _isAttacking = true;
-            while (_target != null && _target.IsAlive)
+            while (this is { IsAlive: true } && _target is {IsAlive: true })
             {
                 _target.TakeDamage(config.damage);
                 await UniTask.WaitForSeconds(config.cooldown);
             }
-            _isAttacking = false;
-
         }
 
         private bool IsInAttackRange()
         {
-            return agent.remainingDistance < config.minDistanceForAttacking;
+            Debug.Log(transform.position + " " +  Vector3.Distance(transform.position, _target.transform.position));
+            return this != null && Vector3.Distance(transform.position, _target.transform.position) < config.minDistanceForAttacking;
         }
 
         private void OnDestroy()

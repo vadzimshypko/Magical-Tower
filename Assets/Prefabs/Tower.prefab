@@ -190,4 +190,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Gameplay.TowerView
   rootForSpells: {fileID: 2414003529157794627}
-  healthConfig: {fileID: 11400000, guid: 4365fd4ee9dfc430cbac237038a111a0, type: 2}
+  config: {fileID: 11400000, guid: 4365fd4ee9dfc430cbac237038a111a0, type: 2}

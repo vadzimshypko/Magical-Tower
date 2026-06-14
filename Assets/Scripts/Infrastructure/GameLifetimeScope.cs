@@ -24,7 +24,7 @@ namespace Scripts.Infrastructure
         [SerializeField]
         private GameResultView  gameResultView;
         [SerializeField]
-        private HealthBarController _healthBarControllerController;
+        private HealthBarController healthBarController;
         [Header("Spells")]
         [SerializeField]
         private Transform spellPanel;
@@ -38,9 +38,9 @@ namespace Scripts.Infrastructure
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<GamePresenter>();
-            builder.RegisterInstance(towerView);
-            builder.RegisterInstance(_healthBarControllerController);
-            builder.RegisterInstance(gameResultView);
+            builder.RegisterComponent(towerView);
+            builder.RegisterComponent(healthBarController);
+            builder.RegisterComponent(gameResultView);
             RegistryEnemies(builder);
             RegistrySpells(builder);
         }
@@ -66,7 +66,7 @@ namespace Scripts.Infrastructure
             builder.RegisterInstance(fireballConfig).As<SpellConfig>().AsSelf();
             builder.RegisterInstance(barrageConfig).As<SpellConfig>().AsSelf();
             
-            builder.RegisterEntryPoint<SpellService>(Lifetime.Scoped)
+            builder.Register<SpellService>(Lifetime.Scoped)
                 .WithParameter(typeof(Transform), spellPanel);
         }
     }
