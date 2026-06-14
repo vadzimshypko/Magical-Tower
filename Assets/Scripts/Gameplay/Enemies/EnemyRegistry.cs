@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using UnityEngine;
 
 namespace Scripts.Gameplay.Enemies
 {
@@ -11,6 +11,8 @@ namespace Scripts.Gameplay.Enemies
         public bool HasEnemiesLeft => _enimies.Count > 0;
 
         private readonly List<EnemyView> _enimies = new();
+        private readonly List<EnemyView> _visibleEnemies = new();
+        private readonly Plane[] _cameraPlanes = new Plane[6];
         
         public EnemyRegistry(EnemyFactory enemyFactory)
         {
@@ -21,13 +23,21 @@ namespace Scripts.Gameplay.Enemies
         public EnemyView GetRandomVisibleEnemy()
         {
             var visibleEnemies = GetAllVisibleEnemies();
-            return visibleEnemies.Count == 0 ? null : visibleEnemies.ElementAt(UnityEngine.Random.Range(0, visibleEnemies.Count));
+            return visibleEnemies.Count == 0 ? null : visibleEnemies[UnityEngine.Random.Range(0, visibleEnemies.Count)];
         }
 
-        public List<EnemyView> GetAllVisibleEnemies()
+        public IReadOnlyList<EnemyView> GetAllVisibleEnemies()
         {
-            var visibleEnemies= _enimies.Where(enemy => enemy.IsVisible()).ToList();
-            return visibleEnemies;
+            _visibleEnemies.Clear();
+            GeometryUtility.CalculateFrustumPlanes(Camera.main, _cameraPlanes);
+            foreach (var enemy in _enimies)
+            {
+                if (enemy != null && enemy.IsVisible(_cameraPlanes))
+                {
+                    _visibleEnemies.Add(enemy);
+                }
+            }
+            return _visibleEnemies;
         }
 
         private void RegisterEnemy(EnemyView enemy)

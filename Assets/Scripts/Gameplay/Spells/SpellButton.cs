@@ -35,7 +35,7 @@ namespace Scripts.Gameplay.Spells
 
         private async UniTask UnblockAfterCooldown()
         {
-            await UniTask.WaitForSeconds(_cooldown);
+            await UniTask.WaitForSeconds(_cooldown, cancellationToken: this.GetCancellationTokenOnDestroy());
             cooldownImage.SetActive(false);
             button.interactable = true;
         }

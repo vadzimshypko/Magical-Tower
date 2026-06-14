@@ -25,6 +25,14 @@ namespace Scripts.Gameplay.Enemies
         private EnemyConfig config;
         
         private TowerView _target;
+        
+        public void Init(TowerView towerView)
+        {
+            Health = config.maxHealth;
+            _target = towerView;
+            agent.destination = _target.transform.position;
+            WaitUntilReachedTower().Forget();
+        }
 
         public void TakeDamage(int damage)
         {
@@ -35,13 +43,12 @@ namespace Scripts.Gameplay.Enemies
                 Destroy(gameObject);
             }
         }
-
-        public void Init(TowerView towerView)
+        
+        public bool IsVisible(Plane[] cameraPlanes)
         {
-            Health = config.maxHealth;
-            _target = towerView;
-            agent.destination = _target.transform.position;
-            WaitUntilReachedTower().Forget();
+            return rendererComponent != null
+                   && rendererComponent.enabled
+                   && GeometryUtility.TestPlanesAABB(cameraPlanes, rendererComponent.bounds);
         }
 
         private async UniTask WaitUntilReachedTower()
@@ -69,11 +76,6 @@ namespace Scripts.Gameplay.Enemies
         private void OnDestroy()
         {
             Died?.Invoke(this);
-        }
-
-        public bool IsVisible()
-        {
-            return rendererComponent.isVisible;
         }
     }
 }
