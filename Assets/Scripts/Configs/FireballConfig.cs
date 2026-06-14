@@ -1,3 +1,4 @@
+using Scripts.Gameplay.Spells;
 using UnityEngine;
 
 namespace Scripts.Configs
@@ -8,5 +9,7 @@ namespace Scripts.Configs
         public float radius;
         public float duration;
         public int damageByBurningPerSecond;
+        
+        public BurningZone burningZonePrefab;
     }
 }

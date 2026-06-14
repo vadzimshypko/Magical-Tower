@@ -26,7 +26,7 @@ namespace Scripts.Gameplay.Spells
         {
             foreach (var enemy in _enemyRegistry.GetAllVisibleEnemies())
             {
-                _projectileFactory.Create(_barrageConfig, enemy.transform.position, DamageEnemy);
+                _projectileFactory.CreateProjectile(_barrageConfig, enemy.transform.position, DamageEnemy);
             }
         }
 
