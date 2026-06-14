@@ -12,10 +12,10 @@ namespace Scripts.Gameplay.Enemies
 
         private readonly List<EnemyView> _enimies = new();
         
-        public EnemyRegistry(WavesSpawner wavesSpawner)
+        public EnemyRegistry(EnemyFactory enemyFactory)
         {
-            wavesSpawner.Spawn += RegisterEnemy;
-            wavesSpawner.Despawn += UnregisterEnemy;
+            enemyFactory.Spawn += RegisterEnemy;
+            enemyFactory.Despawn += UnregisterEnemy;
         }
 
         public EnemyView GetRandomVisibleEnemy()

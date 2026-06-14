@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -9,9 +8,6 @@ namespace Scripts.Gameplay.Enemies
 {
     public class WavesSpawner
     {
-        public event Action<EnemyView> Spawn;
-        public event Action<EnemyView> Despawn;
-        
         private readonly WavesConfig _wavesConfig;
         private readonly EnemyFactory _enemyFactory;
         
@@ -64,14 +60,7 @@ namespace Scripts.Gameplay.Enemies
 
         private void SpawnEnemy(EnemyView enemyPrefab)
         {
-            var enemyView = _enemyFactory.Create(enemyPrefab);
-            Spawn?.Invoke(enemyView);
-            enemyView.Death += _ => EnemyDied(enemyView);
-        }
-
-        private void EnemyDied(EnemyView enemyView)
-        {
-            Despawn?.Invoke(enemyView);
+            _enemyFactory.Create(enemyPrefab);
         }
     }
 }

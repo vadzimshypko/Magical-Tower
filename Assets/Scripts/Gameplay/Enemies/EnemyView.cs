@@ -7,14 +7,15 @@ using UnityEngine.AI;
 namespace Scripts.Gameplay.Enemies
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class EnemyView : MonoBehaviour, IDamagable
+    public class EnemyView : MonoBehaviour, IHealth
     {
-        public event Action<IDamagable> Damaged;
-        public event Action<IDamagable> Death;
+        public event Action<IHealth, int> Damaged;
+        public event Action<IHealth> Died;
 
         public int Health { get; private set; }
-
+        public int MaxHealth => config.maxHealth;
         public bool IsAlive => Health > 0;
+        public Vector3 Position =>  transform.position;
 
         [SerializeField]
         private NavMeshAgent agent;
@@ -28,7 +29,7 @@ namespace Scripts.Gameplay.Enemies
         public void TakeDamage(int damage)
         {
             Health -= damage;
-            Damaged?.Invoke(this);
+            Damaged?.Invoke(this, damage);
             if (Health <= 0)
             {
                 Destroy(gameObject);
@@ -62,13 +63,12 @@ namespace Scripts.Gameplay.Enemies
 
         private bool IsInAttackRange()
         {
-            Debug.Log(transform.position + " " +  Vector3.Distance(transform.position, _target.transform.position));
             return this != null && Vector3.Distance(transform.position, _target.transform.position) < config.minDistanceForAttacking;
         }
 
         private void OnDestroy()
         {
-            Death?.Invoke(this);
+            Died?.Invoke(this);
         }
 
         public bool IsVisible()

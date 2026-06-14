@@ -7,6 +7,9 @@ namespace Scripts.Gameplay.Enemies
 {
     public class EnemyFactory
     {
+        public event Action<EnemyView> Spawn;
+        public event Action<EnemyView> Despawn;
+        
         private Transform _root;
         private TowerView _tower;
         
@@ -27,12 +30,20 @@ namespace Scripts.Gameplay.Enemies
             var rotation = Quaternion.LookRotation(towerPosition - spawnPosition);
             var enemyView = Object.Instantiate(enemyPrefab, spawnPosition, rotation, _root);
             enemyView.Init(_tower);
+            Spawn?.Invoke(enemyView);
+            enemyView.Died += _ => OnEnemyDied(enemyView);
             return enemyView;
         }
 
         private Vector3 GetRandomSpawnPosition(Vector3 center)
         {
             return center + Quaternion.Euler(0f, Random.Range(0f, 360f), 0f) * Vector3.forward * _radius;
+        }
+        
+        
+        private void OnEnemyDied(EnemyView enemyView)
+        {
+            Despawn?.Invoke(enemyView);
         }
 
         private float CalculateSpawnRadius(Collider floor)

@@ -25,6 +25,8 @@ namespace Scripts.Infrastructure
         private GameResultView  gameResultView;
         [SerializeField]
         private HealthBarController healthBarController;
+        [SerializeField]
+        private DamageMessageView damageMessagePrefab;
         [Header("Spells")]
         [SerializeField]
         private Transform spellPanel;
@@ -38,9 +40,15 @@ namespace Scripts.Infrastructure
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<GamePresenter>();
+            
             builder.RegisterComponent(towerView);
             builder.RegisterComponent(healthBarController);
             builder.RegisterComponent(gameResultView);
+
+            builder.RegisterInstance(damageMessagePrefab);
+            builder.RegisterEntryPoint<DamageMessageService>(Lifetime.Scoped);
+            builder.Register<DamageMessageFactory>(Lifetime.Scoped);
+            
             RegistryEnemies(builder);
             RegistrySpells(builder);
         }

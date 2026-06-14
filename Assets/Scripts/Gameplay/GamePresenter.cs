@@ -30,7 +30,7 @@ namespace Scripts.Gameplay
         public void Start()
         {
             StartGameLoop().Forget();
-            _towerView.Death += EntryLoseState;
+            _towerView.Died += EntryLoseState;
         }
 
         private async UniTask StartGameLoop()
@@ -57,7 +57,7 @@ namespace Scripts.Gameplay
             _gameResultView.ShowWin();
         }
         
-        private void EntryLoseState(IDamagable _)
+        private void EntryLoseState(IHealth _)
         {
             _spellService.Stop();
             _gameResultView.ShowLose();

@@ -5,15 +5,18 @@ using VContainer;
 
 namespace Scripts.Gameplay
 {
-    public class TowerView : MonoBehaviour, IDamagable
+    public class TowerView : MonoBehaviour, IHealth
     {        
-        public event Action<IDamagable> Damaged;
-        public event Action<IDamagable> Death;
+        public event Action<IHealth, int> Damaged;
+
+        public event Action<IHealth> Died;
                
         public Transform RootForSpells => rootForSpells;
 
         public bool IsAlive => Health > 0;
         public int Health { get; private set; }
+        public int MaxHealth => config.maxHealth;
+        public Vector3 Position => transform.position;
         
         [SerializeField]
         private Transform rootForSpells;
@@ -23,7 +26,7 @@ namespace Scripts.Gameplay
         [Inject]
         public void Inject(HealthBarController healthBarController)
         {
-            Damaged += x => healthBarController.SetHealth(x.Health, config.maxHealth);
+            Damaged += (x, _) => healthBarController.SetHealth(x.Health, x.MaxHealth);
         }
 
         private void Awake()
@@ -34,10 +37,10 @@ namespace Scripts.Gameplay
         public void TakeDamage(int damage)
         {
             Health -= damage;
-            Damaged?.Invoke(this);
+            Damaged?.Invoke(this, damage);
             if (!IsAlive)
             {
-                Death?.Invoke(this);
+                Died?.Invoke(this);
             }
         }
     }
