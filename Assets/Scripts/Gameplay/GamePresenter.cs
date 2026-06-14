@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Scripts.Gameplay.Enemies;
 using VContainer.Unity;
 
 namespace Scripts.Gameplay

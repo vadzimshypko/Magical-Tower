@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04a6425369e140ceb1440c02095009f1, type: 3}
+  m_Name: FireballConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Configs.FireballConfig
+  title: Fireball
+  cooldown: 3
+  projectilePrefab: {fileID: 8177876790517970016, guid: d2c5dee459b59435088e4dbebca6d480, type: 3}
+  projectileSpeed: 10
+  projectileDamage: 3
+  radius: 4
+  duration: 3
+  damageByBurningPerSecond: 1

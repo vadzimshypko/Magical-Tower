@@ -1,5 +1,7 @@
 using Scripts.Configs;
 using Scripts.Gameplay;
+using Scripts.Gameplay.Enemies;
+using Scripts.Gameplay.Spells;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -8,36 +10,61 @@ namespace Scripts.Infrastructure
 {
     public class GameLifetimeScope : LifetimeScope
     {
-        // enemy stuff
+        [Header("Enemies")]
         [SerializeField]
         private WavesConfig wavesConfig;
         [SerializeField]
         private Transform enemiesRoot;
         [SerializeField]
         private Collider floor;
-        // tower
+        [Header("Tower")]
         [SerializeField]
         private TowerView towerView;
-        // UI
+        [Header("UI")]
         [SerializeField]
         private GameResultView  gameResultView;
+        [Header("Spells")]
+        [SerializeField]
+        private Transform spellPanel;
+        [SerializeField]
+        private SpellButton spellButtonPrefab;
+        [SerializeField]
+        private FireballConfig fireballConfig;
+        [SerializeField]
+        private BarrageConfig barrageConfig;
         
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<GamePresenter>();
-            RegistryEnemy(builder);
+            builder.RegisterInstance(gameResultView);
+            RegistryEnemies(builder);
+            RegistrySpells(builder);
         }
 
-        private void RegistryEnemy(IContainerBuilder builder)
+        private void RegistryEnemies(IContainerBuilder builder)
         {
             builder.RegisterInstance(wavesConfig);
-            builder.RegisterInstance(gameResultView);
+            builder.RegisterInstance(towerView);
             builder.Register<WavesSpawner>(Lifetime.Scoped);
             builder.Register<EnemyFactory>(Lifetime.Scoped)
                 .WithParameter(typeof(Transform), enemiesRoot)
-                .WithParameter(typeof(TowerView), towerView)
                 .WithParameter(typeof(Collider), floor); 
             builder.Register<EnemyRegistry>(Lifetime.Scoped);
+        }
+        
+        private void RegistrySpells(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(spellButtonPrefab);
+            builder.Register<ProjectileFactory>(Lifetime.Scoped);
+            
+            builder.Register<FireballSpell>(Lifetime.Scoped).As<ISpell>();
+            builder.Register<BarrageSpell>(Lifetime.Scoped).As<ISpell>();
+            
+            builder.RegisterInstance(fireballConfig).As<SpellConfig>().AsSelf();
+            builder.RegisterInstance(barrageConfig).As<SpellConfig>().AsSelf();
+            
+            builder.RegisterEntryPoint<SpellService>(Lifetime.Scoped)
+                .WithParameter(typeof(Transform), spellPanel);
         }
     }
 }

@@ -12,25 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31517779707445a39ed847786c9accfb, type: 3}
   m_Name: WavesConfig
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Configs.WavesConfig
-  Waves:
-  - DurationInSeconds: 12
-    SpawnInterval: 3
-    EnemySpawnOptions:
-    - SpawnWeight: 3
-      EnemyPrefab: {fileID: 1040960381595758187, guid: e5f233cc6a2394c83b8129e774a1382a, type: 3}
-    - SpawnWeight: 1
-      EnemyPrefab: {fileID: 1040960381595758187, guid: 3cea866b633ff41209dd30ed3e2bee4c, type: 3}
-  - DurationInSeconds: 10
-    SpawnInterval: 2
-    EnemySpawnOptions:
-    - SpawnWeight: 1
-      EnemyPrefab: {fileID: 1040960381595758187, guid: e5f233cc6a2394c83b8129e774a1382a, type: 3}
-    - SpawnWeight: 1
-      EnemyPrefab: {fileID: 1040960381595758187, guid: 3cea866b633ff41209dd30ed3e2bee4c, type: 3}
-  - DurationInSeconds: 10
-    SpawnInterval: 1
-    EnemySpawnOptions:
-    - SpawnWeight: 1
-      EnemyPrefab: {fileID: 1040960381595758187, guid: 3cea866b633ff41209dd30ed3e2bee4c, type: 3}
-    - SpawnWeight: 2
-      EnemyPrefab: {fileID: 1040960381595758187, guid: b69215bfaa3d342bbae3582af3c40837, type: 3}
+  waves:
+  - durationInSeconds: 12
+    spawnInterval: 3
+    enemySpawnOptions:
+    - spawnWeight: 3
+      enemyPrefab: {fileID: 1040960381595758187, guid: e5f233cc6a2394c83b8129e774a1382a, type: 3}
+    - spawnWeight: 1
+      enemyPrefab: {fileID: 1040960381595758187, guid: 3cea866b633ff41209dd30ed3e2bee4c, type: 3}
+  - durationInSeconds: 10
+    spawnInterval: 2
+    enemySpawnOptions:
+    - spawnWeight: 3
+      enemyPrefab: {fileID: 1040960381595758187, guid: e5f233cc6a2394c83b8129e774a1382a, type: 3}
+    - spawnWeight: 1
+      enemyPrefab: {fileID: 1040960381595758187, guid: 3cea866b633ff41209dd30ed3e2bee4c, type: 3}
+    - spawnWeight: 1
+      enemyPrefab: {fileID: 1040960381595758187, guid: b69215bfaa3d342bbae3582af3c40837, type: 3}
+  - durationInSeconds: 10
+    spawnInterval: 2
+    enemySpawnOptions:
+    - spawnWeight: 1
+      enemyPrefab: {fileID: 1040960381595758187, guid: b69215bfaa3d342bbae3582af3c40837, type: 3}
+    - spawnWeight: 1
+      enemyPrefab: {fileID: 1040960381595758187, guid: 3cea866b633ff41209dd30ed3e2bee4c, type: 3}

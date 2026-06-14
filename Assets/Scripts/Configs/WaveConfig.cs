@@ -6,8 +6,8 @@ namespace Scripts.Configs
     [Serializable]
     public class WaveConfig
     {
-        public float DurationInSeconds;
-        public float SpawnInterval; 
-        public List<EnemySpawnConfig> EnemySpawnOptions;
+        public float durationInSeconds;
+        public float spawnInterval; 
+        public List<EnemySpawnConfig> enemySpawnOptions;
     }
 }

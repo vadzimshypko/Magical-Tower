@@ -1,12 +1,12 @@
 using System;
-using Scripts.Gameplay;
+using Scripts.Gameplay.Enemies;
 
 namespace Scripts.Configs
 {
     [Serializable]
     public class EnemySpawnConfig
     {
-        public int SpawnWeight;
-        public EnemyView EnemyPrefab;
+        public int spawnWeight;
+        public EnemyView enemyPrefab;
     }
 }

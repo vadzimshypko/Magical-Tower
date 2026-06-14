@@ -3,13 +3,10 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-namespace Scripts.Gameplay
+namespace Scripts.Gameplay.Enemies
 {
     public class EnemyFactory
     {
-        public event Action<EnemyView> Spawn;
-        public event Action<EnemyView> Despawn;
-        
         private Transform _root;
         private TowerView _tower;
         
@@ -29,8 +26,7 @@ namespace Scripts.Gameplay
             var spawnPosition = GetRandomSpawnPosition(towerPosition);
             var rotation = Quaternion.LookRotation(towerPosition - spawnPosition);
             var enemyView = Object.Instantiate(enemyPrefab, spawnPosition, rotation, _root);
-            enemyView.Init(_tower, OnEnemyDied);
-            Spawn?.Invoke(enemyView);
+            enemyView.Init(_tower);
             return enemyView;
         }
 
@@ -54,11 +50,6 @@ namespace Scripts.Gameplay
                 }
             }
             return maxDistanceToTower;
-        }
-        
-        private void OnEnemyDied(EnemyView enemyView)
-        {
-            Despawn?.Invoke(enemyView);
         }
     }
 }

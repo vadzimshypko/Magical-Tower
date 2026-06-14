@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5806518618462207972}
   - component: {fileID: 8164496265195990628}
   - component: {fileID: 9137444183631390640}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 4833781248736960321}
   - component: {fileID: 5437664115115889477}
   - component: {fileID: 1040960381595758187}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fast Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,4 +181,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scripts.Gameplay.EnemyView
   agent: {fileID: 5437664115115889477}
-  renderer: {fileID: 9137444183631390640}
+  rendererComponent: {fileID: 9137444183631390640}
+  enemyConfig: {fileID: 11400000, guid: e6beb40cdd338457494d202a03b28551, type: 2}

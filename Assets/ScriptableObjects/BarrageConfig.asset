@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eba26b78b11e445dbb332f08b728207f, type: 3}
+  m_Name: BarrageConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Scripts.Configs.BarrageConfig
+  title: Barrage
+  cooldown: 2
+  projectilePrefab: {fileID: 8177876790517970016, guid: 0c3af9e6296264671b3b7a9b716a04dd, type: 3}
+  projectileSpeed: 20
+  projectileDamage: 2
